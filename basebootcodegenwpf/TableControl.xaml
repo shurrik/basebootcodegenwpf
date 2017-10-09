@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="UnityApp.Unity.TableControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UnityApp.Unity"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="ElementStyle" TargetType="FrameworkElement">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource ElementStyle}">
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="#d6c79b"></SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinHeight" Value="24"></Setter>
+            <Setter Property="MinWidth" Value="100"></Setter>
+            <Setter Property="Margin" Value="5,2,5,2"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource ElementStyle}">
+            <Setter Property="MinHeight" Value="24"></Setter>
+            <Setter Property="MinWidth" Value="100"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{x:Null}"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="HorizontalGridLinesBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="#d6c79b"></SolidColorBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinRowHeight" Value="32"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel>
+            <DataGrid HeadersVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" x:Name="dgData" GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding Path=ParamKey,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Path=ParamKey,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,TargetNullValue=请输入}"></TextBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="10">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource TextBlockStyle}" Text=":"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding Path=ParamValue,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Path=ParamValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,TargetNullValue=请输入}"></TextBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource ButtonStyle}" Click="btnDel_Click">
+                                    <Button.Content>
+                                        <Border Width="32" Height="32" CornerRadius="16" Background="CornflowerBlue" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Path Data="M0 0L22 0" Stroke="WhiteSmoke" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center"></Path>
+                                        </Border>
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Width="35">
+                <Button x:Name="btnAdd" Style="{StaticResource ButtonStyle}" Click="btnAdd_Click">
+                    <Button.Content>
+                        <Border Width="32" Height="32" CornerRadius="16" Background="CornflowerBlue" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Path Data="M0 11L22 11M11 0L11 22" Stroke="WhiteSmoke" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center"></Path>
+                        </Border>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

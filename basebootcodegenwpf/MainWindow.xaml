@@ -2,7 +2,75 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
+
+    <!--<StackPanel Orientation="Horizontal">
+        <Label Content="类:"/>
+        <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+        <Label Content="类注释:"/>
+        <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+        <Button Content="增加属性" Click="AddData_Click" Margin="5"/>
+    </StackPanel>-->
     <Grid>
-        
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="类:"/>
+            <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+            <Label Content="类注释:"/>
+            <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+            <Button Content="增加属性" Click="AddData_Click" Margin="5"/>
+        </StackPanel>-->
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserAddRows="False" Name="dg_Grid" AreRowDetailsFrozen="False" AllowDrop="True" Margin="23,0,23,32">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="编号" Binding="{Binding Checked}"/>
+                <DataGridTemplateColumn Header="姓 名" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="年 龄">
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate >
+                            <TextBox Text="{Binding Age}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--不使用依赖属性绑定下拉框时,数据源中必须包含该属性字段-->
+                <DataGridTemplateColumn Header="Template模式">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedValue="{Binding Path=Value}" ItemsSource="{Binding Path=Selection}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!--依赖属性绑定数据源下拉框必须同时指定EditingElementStyle、ElemengStyle才能显示下拉框中的数据-->
+                <DataGridComboBoxColumn Header="ComboBox模式（修正）">
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Path=SelectionList,RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}" />
+                            <Setter Property="SelectedValue" Value="{Binding Path=Value}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Path=SelectionList,RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}" />
+                            <Setter Property="SelectedValue" Value="{Binding Path=Value}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTemplateColumn Header="图 片">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <Image Source="{Binding  Path=Address}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
