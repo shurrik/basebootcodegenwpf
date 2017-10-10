@@ -102,7 +102,30 @@ namespace basebootcodegenwpf
 
             row["protoType"] = SelectionList;
             row["allowNull"] = false;
-            tb.Rows.Add(row); ;
+            tb.Rows.Add(row);
+        }
+
+        private void DelData_Click(object sender, RoutedEventArgs e)
+        {
+            if (dg_Grid.SelectedItem != null)
+            {
+                DataRowView DRV = (DataRowView)dg_Grid.SelectedItem;
+                string Name = DRV.Row[0].ToString();//获取选中行的name列内容
+
+                MessageBoxResult result = MessageBox.Show("确定要删除属性？", "提示", MessageBoxButton.YesNo);//弹出删除对话框
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        DRV.Delete();//删除行
+                        MessageBox.Show("删除成功！");
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else {
+                MessageBox.Show("请选择属性！");
+            }
         }
     }
 }

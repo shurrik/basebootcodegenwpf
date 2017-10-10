@@ -20,7 +20,9 @@
             <TextBox TextWrapping="Wrap" Text="" Width="120"/>
             <Label Content="类注释:"/>
             <TextBox TextWrapping="Wrap" Text="" Width="120"/>
-            <Button Content="增加属性" Click="AddData_Click" Margin="5"/>
+            <Button Content="添加属性" Click="AddData_Click" Margin="5"/>
+            <Button Content="删除属性" Click="DelData_Click" Margin="5"/>
+
         </StackPanel>
         <DataGrid Name="dg_Grid" AutoGenerateColumns="false" Grid.Row="1" ItemsSource="{Binding}" CanUserAddRows="False">
         <!--<DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserAddRows="False" Name="dg_Grid" AreRowDetailsFrozen="False" AllowDrop="True" Margin="23,0,23,32">-->
@@ -33,14 +35,14 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <!--不使用依赖属性绑定下拉框时,数据源中必须包含该属性字段-->
-                <DataGridTemplateColumn Header="类型">
+                <DataGridTemplateColumn Header="类型" Width="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox SelectedValue="{Binding Path=Value}" ItemsSource="{Binding Path=protoType}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="长度" Width="100">
+                <DataGridTemplateColumn Header="长度" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding lenghth}"/>
