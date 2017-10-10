@@ -49,8 +49,13 @@ namespace basebootcodegenwpf
             InitializeComponent();
 
             SelectionList.Add("String");
-            SelectionList.Add("Date");
             SelectionList.Add("Integer");
+            SelectionList.Add("Float");
+            SelectionList.Add("Long");
+            SelectionList.Add("Double");
+            SelectionList.Add("BigDecimal");
+            SelectionList.Add("Boolean");
+            SelectionList.Add("Date");
 
             Banding();
         }
