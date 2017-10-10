@@ -11,7 +11,7 @@
         <Button Content="增加属性" Click="AddData_Click" Margin="5"/>
     </StackPanel>-->
     <Grid>
-        <!--<Grid.RowDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -21,52 +21,37 @@
             <Label Content="类注释:"/>
             <TextBox TextWrapping="Wrap" Text="" Width="120"/>
             <Button Content="增加属性" Click="AddData_Click" Margin="5"/>
-        </StackPanel>-->
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserAddRows="False" Name="dg_Grid" AreRowDetailsFrozen="False" AllowDrop="True" Margin="23,0,23,32">
+        </StackPanel>
+        <DataGrid Name="dg_Grid" AutoGenerateColumns="false" Grid.Row="1" ItemsSource="{Binding}" CanUserAddRows="False">
+        <!--<DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserAddRows="False" Name="dg_Grid" AreRowDetailsFrozen="False" AllowDrop="True" Margin="23,0,23,32">-->
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="编号" Binding="{Binding Checked}"/>
-                <DataGridTemplateColumn Header="姓 名" Width="100">
+                <DataGridTemplateColumn Header="属性" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="年 龄">
-                    <DataGridTemplateColumn.CellTemplate >
-                        <DataTemplate >
-                            <TextBox Text="{Binding Age}"/>
+                            <TextBox Text="{Binding name}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <!--不使用依赖属性绑定下拉框时,数据源中必须包含该属性字段-->
-                <DataGridTemplateColumn Header="Template模式">
+                <DataGridTemplateColumn Header="类型">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox SelectedValue="{Binding Path=Value}" ItemsSource="{Binding Path=Selection}" />
+                            <ComboBox SelectedValue="{Binding Path=Value}" ItemsSource="{Binding Path=protoType}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                <!--依赖属性绑定数据源下拉框必须同时指定EditingElementStyle、ElemengStyle才能显示下拉框中的数据-->
-                <DataGridComboBoxColumn Header="ComboBox模式（修正）">
-                    <DataGridComboBoxColumn.EditingElementStyle>
-                        <Style TargetType="ComboBox">
-                            <Setter Property="ItemsSource" Value="{Binding Path=SelectionList,RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}" />
-                            <Setter Property="SelectedValue" Value="{Binding Path=Value}" />
-                        </Style>
-                    </DataGridComboBoxColumn.EditingElementStyle>
-                    <DataGridComboBoxColumn.ElementStyle>
-                        <Style TargetType="ComboBox">
-                            <Setter Property="ItemsSource" Value="{Binding Path=SelectionList,RelativeSource={RelativeSource AncestorType={x:Type Window},Mode=FindAncestor}}" />
-                            <Setter Property="SelectedValue" Value="{Binding Path=Value}" />
-                        </Style>
-                    </DataGridComboBoxColumn.ElementStyle>
-                </DataGridComboBoxColumn>
-                <DataGridTemplateColumn Header="图 片">
+                <DataGridTemplateColumn Header="长度" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate >
-                            <Image Source="{Binding  Path=Address}"/>
+                        <DataTemplate>
+                            <TextBox Text="{Binding lenghth}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridCheckBoxColumn Header="允许为空" Binding="{Binding allowNull}"/>
+                <DataGridTemplateColumn Header="注释" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding remark}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
