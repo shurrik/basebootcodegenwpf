@@ -55,10 +55,6 @@ namespace basebootcodegenwpf
 
         private void GenJson_Click(object sender, RoutedEventArgs e)
         {
-            //foreach (ProItem item in items)
-            //{
-            //    Console.WriteLine(item.Name + "_" + item.ProType.Name + "_" + item.Length + "_" + item.AllowNull + "_" + item.Remark);
-            //}
 
             String str = "";
             str += "[\n";
@@ -67,17 +63,6 @@ namespace basebootcodegenwpf
             String classRemark = this.classRemark.Text;
             str += "        \"" + className + "#" + classRemark + "\":\n";
             str += "            {\n";
-            //foreach (ProItem item in items)
-            //{
-            //    String name = item.Name;
-            //    String protoType = item.ProType.Name;
-            //    int lenghth = item.Length;
-            //    String allowNull = item.AllowNull?"1":"0";
-            //    String remark = item.Remark;
-            //    str += "                \"" + name + "\":\"" + protoType + "#" + lenghth + "#0#" + allowNull + "#" + remark + "\",\n";
-
-
-            //}
 
             for(int i=0;i<items.Count;i++)
             {
@@ -108,11 +93,32 @@ namespace basebootcodegenwpf
         {
             ProItem newItem = new ProItem("",1,10,false,false,"");
 
-            //items.RemoveAt(1);
             items.Add(newItem);
-            //dataGrid1.Items.Add(newItem);
+        }
 
+        private void DelData_Click(object sender, RoutedEventArgs e)
+        {
 
+            Console.WriteLine("delclick");
+            if (dataGrid1.SelectedItem != null)
+            {
+                ProItem DRV = (ProItem)dataGrid1.SelectedItem;
+
+                MessageBoxResult result = MessageBox.Show("确定要删除属性？", "提示", MessageBoxButton.YesNo);//弹出删除对话框
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        items.Remove(DRV);
+                        MessageBox.Show("删除成功！");
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择属性！");
+            }
         }
 
     }

@@ -17,7 +17,7 @@
             <Label Content="类注释:"/>
             <TextBox Name="classRemark" TextWrapping="Wrap" Text="" Width="120"/>
             <Button Content="添加属性" Click="AddData_Click" Margin="5"/>
-            <Button Content="删除属性" Click="GenJson_Click" Margin="5"/>
+            <Button Content="删除属性" Click="DelData_Click" Margin="5"/>
             <Button Content="生成模型" Click="GenJson_Click" Margin="5"/>
         </StackPanel>
 
