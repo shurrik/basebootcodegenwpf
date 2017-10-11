@@ -3,62 +3,48 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="BaseBoot-CodegenV1.0.0" Height="350" Width="525">
 
-    <!--<StackPanel Orientation="Horizontal">
-        <Label Content="类:"/>
-        <TextBox TextWrapping="Wrap" Text="" Width="120"/>
-        <Label Content="类注释:"/>
-        <TextBox TextWrapping="Wrap" Text="" Width="120"/>
-        <Button Content="增加属性" Click="AddData_Click" Margin="5"/>
-    </StackPanel>-->
+
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
+
             <Label Content="类:"/>
-            <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+            <TextBox Name="className" TextWrapping="Wrap" Text="" Width="120"/>
             <Label Content="类注释:"/>
-            <TextBox TextWrapping="Wrap" Text="" Width="120"/>
+            <TextBox Name="classRemark" TextWrapping="Wrap" Text="" Width="120"/>
             <Button Content="添加属性" Click="AddData_Click" Margin="5"/>
             <Button Content="删除属性" Click="GenJson_Click" Margin="5"/>
             <Button Content="生成模型" Click="GenJson_Click" Margin="5"/>
-
-
         </StackPanel>
-        <DataGrid Name="dg_Grid" AutoGenerateColumns="false" Grid.Row="1" ItemsSource="{Binding}" CanUserAddRows="False">
-        <!--<DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserAddRows="False" Name="dg_Grid" AreRowDetailsFrozen="False" AllowDrop="True" Margin="23,0,23,32">-->
+
+
+        <DataGrid x:Name="dataGrid1"
+                      Grid.Row="1"
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False"
+                  AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=Items}" SelectionChanged="dataGrid1_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="属性" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding name}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <!--不使用依赖属性绑定下拉框时,数据源中必须包含该属性字段-->
-                <DataGridTemplateColumn Header="类型" Width="70">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox SelectedValue="{Binding Path=Value}" ItemsSource="{Binding Path=protoType}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="长度" Width="50">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding lenghth}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridCheckBoxColumn Header="允许为空" Binding="{Binding allowNull}"/>
-                <DataGridTemplateColumn Header="注释" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding remark}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="name" Header="属性" Binding="{Binding Path=Name}" Width="100"/>
+
+                <DataGridComboBoxColumn x:Name="proType" Header="类型" Width="100" 
+                                        SortMemberPath="Type.Id"
+                                        SelectedValueBinding="{Binding Path=Type.Name}">
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <EventSetter Event="SelectionChanged" Handler="DayChanged" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn x:Name="length" Header="长度" Binding="{Binding Path=Length}" Width="100"/>
+                <DataGridCheckBoxColumn x:Name="allowNull" Header="允许为空" Binding="{Binding Path=AllowNull}" />
+                <DataGridTextColumn x:Name="remark" Header="注释" Binding="{Binding Path=Remark}" Width="100"/>
+
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -18,103 +18,132 @@ using System.Collections.ObjectModel;
 namespace basebootcodegenwpf
 {
 
-    public class GridItem
-    {
-        public String name { get; set; }
-        public String protoType { get; set; }
-        public String lenghth { get; set; }
-        public String isPk { get; set; }
-        public String allowNull { get; set; }
-        public String remark { get; set; }
-    }
-    /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// <summary> 
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        DataTable tb;
+        //ObservableCollection<ProItem> items = new ObservableCollection<ProItem>()
+        //    {
+        //        new CalendarItem(3, "Work"),
+        //        new CalendarItem(2, "travel"),
+        //        new CalendarItem(1, "vacation"),
+        //        new CalendarItem(6, "Fishing")
+        //    };
 
-        /// <summary>
-        /// 下拉框数据源
-        /// </summary>        
-        public ObservableCollection<String> SelectionList
-        {
-            get { return _selectionList; }
-            set { _selectionList = value; }
-        }
-        private ObservableCollection<String> _selectionList = new ObservableCollection<String>();
+        ObservableCollection<ProItem> items = new ObservableCollection<ProItem>();
+
 
         public MainWindow()
         {
             InitializeComponent();
 
-            SelectionList.Add("String");
-            SelectionList.Add("Integer");
-            SelectionList.Add("Float");
-            SelectionList.Add("Long");
-            SelectionList.Add("Double");
-            SelectionList.Add("BigDecimal");
-            SelectionList.Add("Boolean");
-            SelectionList.Add("Date");
+            dataGrid1.ItemsSource = items;
 
-            Banding();
+            proType.ItemsSource = ProType.types;
         }
 
-        
-        private void Banding()
+        private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tb = new DataTable();
-            DataColumn name = new DataColumn("name");
-            DataColumn protoType = new DataColumn("protoType", typeof(ObservableCollection<String>)); ;
-            DataColumn lenghth = new DataColumn("lenghth");
-            DataColumn isPk = new DataColumn("isPk");
-            DataColumn allowNull = new DataColumn("allowNull");
-            DataColumn remark = new DataColumn("remark");
-            tb.Columns.Add(name);
-            tb.Columns.Add(protoType);
-            tb.Columns.Add(lenghth);
-            //tb.Columns.Add(isPk);
-            tb.Columns.Add(allowNull);
-            tb.Columns.Add(remark);
-            dg_Grid.DataContext = tb;
-            
+
         }
 
-        private void AddData_Click(object sender, RoutedEventArgs e)
+        private void DayChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataRow row = tb.NewRow();
-
-            row["protoType"] = SelectionList;
-            row["allowNull"] = false;
-            tb.Rows.Add(row);
-        }
-
-        private void DelData_Click(object sender, RoutedEventArgs e)
-        {
-            if (dg_Grid.SelectedItem != null)
-            {
-                DataRowView DRV = (DataRowView)dg_Grid.SelectedItem;
-                string Name = DRV.Row[0].ToString();//获取选中行的name列内容
-
-                MessageBoxResult result = MessageBox.Show("确定要删除属性？", "提示", MessageBoxButton.YesNo);//弹出删除对话框
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        DRV.Delete();//删除行
-                        MessageBox.Show("删除成功！");
-                        break;
-                    case MessageBoxResult.No:
-                        break;
-                }
-            }
-            else {
-                MessageBox.Show("请选择属性！");
-            }
+            var d = (sender as ComboBox).SelectedItem;
         }
 
         private void GenJson_Click(object sender, RoutedEventArgs e)
         {
+            //foreach (ProItem item in items)
+            //{
+            //    Console.WriteLine(item.Name + "_" + item.ProType.Name + "_" + item.Length + "_" + item.AllowNull + "_" + item.Remark);
+            //}
+
+            String str = "";
+            str += "[\n";
+            str += "    {\n";
+            String className = this.className.Text;
+            String classRemark = this.classRemark.Text;
+            str += "        \"" + className + "#" + classRemark + "\":\n";
+            str += "            {\n";
+            //foreach (ProItem item in items)
+            //{
+            //    String name = item.Name;
+            //    String protoType = item.ProType.Name;
+            //    int lenghth = item.Length;
+            //    String allowNull = item.AllowNull?"1":"0";
+            //    String remark = item.Remark;
+            //    str += "                \"" + name + "\":\"" + protoType + "#" + lenghth + "#0#" + allowNull + "#" + remark + "\",\n";
+
+
+            //}
+
+            for(int i=0;i<items.Count;i++)
+            {
+                ProItem item = items[i];
+                String name = item.Name;
+                String protoType = item.ProType.Name;
+                int lenghth = item.Length;
+                String allowNull = item.AllowNull ? "1" : "0";
+                String remark = item.Remark;
+                str += "                \"" + name + "\":\"" + protoType + "#" + lenghth + "#0#" + allowNull + "#" + remark + "\"";
+                if(i==items.Count-1)
+                {
+                    str +="\n";   
+                }
+                else{
+                    str += ",\n";
+                }
+            }
+
+            str += "            }\n";
+            str += "    }\n";
+            str += "]\n";
+            Console.WriteLine(str);
 
         }
+
+        private void AddData_Click(object sender, RoutedEventArgs e)
+        {
+            ProItem newItem = new ProItem("",1,10,false,false,"");
+
+            //items.RemoveAt(1);
+            items.Add(newItem);
+            //dataGrid1.Items.Add(newItem);
+
+
+        }
+
+    }
+    class ProItem
+    {
+        public String Name { get; set; }
+        public ProType ProType { get; set; }
+        public int Length { get; set; }
+        public Boolean IsPk { get; set; }
+        public Boolean AllowNull { get; set; }
+        public String Remark { get; set; }
+
+        public ProItem(String name, int proType, int length, Boolean isPk, Boolean allowNull, String remark)
+        {
+            Name = name;
+            ProType = new ProType(proType);
+            Length = length;
+            IsPk = isPk;
+            AllowNull = allowNull;
+            Remark = remark;
+        }
+    }
+
+    public class ProType
+    {
+        public static readonly List<string> types = new List<string>() { "String","Integer","Date"};
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public ProType(int i)
+        { Id = i; Name = types[i - 1]; }
     }
 }
