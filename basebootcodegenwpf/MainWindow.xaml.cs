@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Data;
 using basebootcodegenwpf.Model;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace basebootcodegenwpf
 {
@@ -86,7 +87,30 @@ namespace basebootcodegenwpf
             str += "    }\n";
             str += "]\n";
             Console.WriteLine(str);
+            createJsonFile(str);
 
+        }
+
+        private void createJsonFile(String str)
+        {
+
+            if (!File.Exists("entity.json"))
+            {
+                FileStream fs1 = new FileStream("entity.json", FileMode.Create, FileAccess.Write);//创建写入文件 
+                StreamWriter sw = new StreamWriter(fs1);
+                sw.WriteLine(str);//开始写入值
+                sw.Close();
+                fs1.Close();
+            }
+            else
+            {
+                FileStream fs = new FileStream("entity.json", FileMode.Truncate, FileAccess.Write);
+                StreamWriter sr = new StreamWriter(fs);
+                sr.WriteLine(str);//开始写入值
+                sr.Close();
+                fs.Close();
+
+            }
         }
 
         private void AddData_Click(object sender, RoutedEventArgs e)
