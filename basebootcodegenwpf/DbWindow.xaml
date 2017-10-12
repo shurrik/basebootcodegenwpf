@@ -1,0 +1,46 @@
+﻿<Window x:Class="basebootcodegenwpf.DbWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BaseBoot-CodegenV1.0.0" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <!--<TextBox Height="32" HorizontalAlignment="Left" Margin="6,10,0,0" Name="FileNameTextBox" 
+                 VerticalAlignment="Top" Width="393" />
+        <Button Content="Browse" Height="32" HorizontalAlignment="Left" Margin="405,10,0,0" 
+                Name="button1" VerticalAlignment="Top" Width="88" Click="button1_Click" />-->
+
+        <!--<Label Content="mysql路径:" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>-->
+        <Label Content="数据库主机:" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+        <Label Content="账号:" HorizontalAlignment="Left" Margin="20,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="密码:" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="端口:" HorizontalAlignment="Left" Margin="20,140,0,0" VerticalAlignment="Top"/>
+        <Label Content="数据库:" HorizontalAlignment="Left" Margin="20,180,0,0" VerticalAlignment="Top"/>
+
+
+
+        <!--<TextBox Name="path" HorizontalAlignment="Left" Height="23" Margin="100,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>-->
+        <TextBox Name="host" HorizontalAlignment="Left" Height="23" Margin="100,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="username" HorizontalAlignment="Left" Height="23" Margin="100,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="password" HorizontalAlignment="Left" Height="23" Margin="100,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="port" HorizontalAlignment="Left" Height="23" Margin="100,140,0,0" TextWrapping="Wrap" Text="3306" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="schemal" HorizontalAlignment="Left" Height="23" Margin="100,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+
+        <Button Name="importBtn" Content="导入数据库" HorizontalAlignment="Left" Margin="395,220,0,0" VerticalAlignment="Top" Width="75" Click="ImportSQL_Click"/>
+
+        <!--<Label Content="如C:\Program Files\MySQL\MySQL Server 5.7" HorizontalAlignment="Left" Margin="220,20,0,0" VerticalAlignment="Top"/>-->
+        <Label Content="如localhost" HorizontalAlignment="Left" Margin="220,20,0,0" VerticalAlignment="Top"/>
+        <Label Content="如root" HorizontalAlignment="Left" Margin="220,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="220,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="220,140,0,0" VerticalAlignment="Top"/>
+        <RichTextBox Name="richTextBox1" HorizontalAlignment="Left" Height="73" Margin="26,225,0,0" VerticalAlignment="Top" Width="334">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <!--<Button Name="nextBtn" Content="下一步" HorizontalAlignment="Left" Margin="393,274,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.293,0.409" Click="Next_Click"/>-->
+        <!--<Button Content="pathBtn" HorizontalAlignment="Left" Margin="231,20,0,0" VerticalAlignment="Top" Width="75" Click="Path_Click"/>-->
+    </Grid>
+</Window>

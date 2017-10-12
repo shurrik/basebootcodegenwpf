@@ -69,7 +69,7 @@ namespace basebootcodegenwpf
             {
                 ProItem item = items[i];
                 String name = item.Name;
-                String protoType = item.ProType.Name;
+                String protoType = item.ProType;
                 int lenghth = item.Length;
                 String allowNull = item.AllowNull ? "1" : "0";
                 String remark = item.Remark;
@@ -115,7 +115,7 @@ namespace basebootcodegenwpf
 
         private void AddData_Click(object sender, RoutedEventArgs e)
         {
-            ProItem newItem = new ProItem("",1,10,false,false,"");
+            ProItem newItem = new ProItem("","String",10,false,false,"");
 
             items.Add(newItem);
         }
@@ -149,16 +149,16 @@ namespace basebootcodegenwpf
     class ProItem
     {
         public String Name { get; set; }
-        public ProType ProType { get; set; }
+        public String ProType { get; set; }
         public int Length { get; set; }
         public Boolean IsPk { get; set; }
         public Boolean AllowNull { get; set; }
         public String Remark { get; set; }
 
-        public ProItem(String name, int proType, int length, Boolean isPk, Boolean allowNull, String remark)
+        public ProItem(String name, String proType, int length, Boolean isPk, Boolean allowNull, String remark)
         {
             Name = name;
-            ProType = new ProType(proType);
+            ProType = proType;
             Length = length;
             IsPk = isPk;
             AllowNull = allowNull;

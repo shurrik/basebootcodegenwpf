@@ -32,8 +32,7 @@
                 <DataGridTextColumn x:Name="name" Header="属性" Binding="{Binding Path=Name}" Width="100"/>
 
                 <DataGridComboBoxColumn x:Name="proType" Header="类型" Width="100" 
-                                        SortMemberPath="Type.Id"
-                                        SelectedValueBinding="{Binding Path=Type.Name}">
+                                        SelectedValueBinding="{Binding Path=ProType}">
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="{x:Type ComboBox}">
                             <EventSetter Event="SelectionChanged" Handler="DayChanged" />
