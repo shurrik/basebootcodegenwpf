@@ -74,20 +74,26 @@ namespace basebootcodegenwpf
                 String allowNull = item.AllowNull ? "1" : "0";
                 String remark = item.Remark;
                 str += "                \"" + name + "\":\"" + protoType + "#" + lenghth + "#0#" + allowNull + "#" + remark + "\"";
-                if(i==items.Count-1)
-                {
-                    str +="\n";   
-                }
-                else{
-                    str += ",\n";
-                }
+                //if(i==items.Count-1)
+                //{
+                //    str +="\n";   
+                //}
+                //else{
+                //    str += ",\n";
+                //}
+                str += ",\n";
             }
+            str += "                \"createDate\":\"Date#0#0#0#创建日期\"\n";
 
             str += "            }\n";
             str += "    }\n";
             str += "]\n";
             Console.WriteLine(str);
             createJsonFile(str);
+
+            this.Hide();
+            CodegenWindow codegenWindow = new CodegenWindow();
+            codegenWindow.Show();
 
         }
 
