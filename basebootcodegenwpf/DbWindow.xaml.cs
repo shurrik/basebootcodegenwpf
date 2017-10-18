@@ -33,7 +33,6 @@ namespace basebootcodegenwpf
         {
 
             importBtn.IsEnabled = false;
-            //nextBtn.IsEnabled = false;
 
             //String path = this.path.Text;
             String host = this.host.Text;
@@ -65,7 +64,7 @@ namespace basebootcodegenwpf
             p.StandardInput.WriteLine("mysql -h " + host + " -P " + port + " -u" + username + " -p" + password + " " + schemal + "<output\\sql\\resource.sql --default-character-set=utf8");
 
             p.StandardInput.WriteLine("@echo init success!");
-            p.StandardInput.WriteLine("move.bat");
+            p.StandardInput.WriteLine("moveforce.bat");
 
             p.StandardInput.WriteLine("exit"); // 退出
 
@@ -106,7 +105,6 @@ namespace basebootcodegenwpf
             Console.WriteLine("CmdProcess_Exited");
             Dispatcher.Invoke(() =>
             {
-                //this.nextBtn.IsEnabled = true;
                 this.importBtn.IsEnabled = true;
                 this.richTextBox1.AppendText("导入完成");
                 this.richTextBox1.ScrollToEnd();

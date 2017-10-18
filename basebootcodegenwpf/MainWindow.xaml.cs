@@ -24,14 +24,6 @@ namespace basebootcodegenwpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        //ObservableCollection<ProItem> items = new ObservableCollection<ProItem>()
-        //    {
-        //        new CalendarItem(3, "Work"),
-        //        new CalendarItem(2, "travel"),
-        //        new CalendarItem(1, "vacation"),
-        //        new CalendarItem(6, "Fishing")
-        //    };
-
         ObservableCollection<ProItem> items = new ObservableCollection<ProItem>();
 
 
@@ -174,7 +166,7 @@ namespace basebootcodegenwpf
 
     public class ProType
     {
-        public static readonly List<string> types = new List<string>() { "String","Integer","Date"};
+        public static readonly List<string> types = new List<string>() { "String", "Integer", "Boolean", "Date", "Float", "Double", "Long", "BigDecimal" };
 
         public int Id { get; set; }
         public string Name { get; set; }
