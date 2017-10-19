@@ -62,17 +62,11 @@ namespace basebootcodegenwpf
                 ProItem item = items[i];
                 String name = item.Name;
                 String protoType = item.ProType;
-                int lenghth = item.Length;
+                int length = item.Length;
+                length = this.getLength(protoType, length);
                 String allowNull = item.AllowNull ? "1" : "0";
                 String remark = item.Remark;
-                str += "                \"" + name + "\":\"" + protoType + "#" + lenghth + "#0#" + allowNull + "#" + remark + "\"";
-                //if(i==items.Count-1)
-                //{
-                //    str +="\n";   
-                //}
-                //else{
-                //    str += ",\n";
-                //}
+                str += "                \"" + name + "\":\"" + protoType + "#" + length + "#0#" + allowNull + "#" + remark + "\"";
                 str += ",\n";
             }
             str += "                \"createDate\":\"Date#0#0#0#创建日期\"\n";
@@ -87,6 +81,18 @@ namespace basebootcodegenwpf
             CodegenWindow codegenWindow = new CodegenWindow();
             codegenWindow.Show();
 
+        }
+
+        private int getLength(String protoType,int length)
+        { 
+            if(protoType.Equals("Date"))
+            {
+                return 0;
+            }
+            else
+            {
+                return length;
+            }
         }
 
         private void createJsonFile(String str)
